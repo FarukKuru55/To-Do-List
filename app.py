@@ -1,3 +1,12 @@
+
+import logging
+
+# Loglama ayarlarını yapıyoruz:
+# filename='sistem.log': Kayıtların tutulacağı dosya adı
+# level=logging.INFO: Hangi önemdeki mesajlar kaydedilsin?
+logging.basicConfig(filename='sistem.log', level=logging.INFO, 
+                    format='%(asctime)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S')
+
 from flask import Flask, render_template, request
 from flask import jsonify
 from flask_cors import CORS
@@ -112,7 +121,7 @@ def update_yapilacak_is():
     conn.commit()
     conn.close()
     
-    return jsonify({'message': 'Görev başarıyla güncellendi!'}) ,200
+    return jsonify({'message': 'Görev başarıyla güncellendi!'}) ,200 
 
   # Tik atma
 # app.py'de toggle_yapilacak_is fonksiyonunu bul ve böyle değiştir:
@@ -123,15 +132,14 @@ def toggle_yapilacak_is():
     id = data.get('id')  # ID'yi değişkene alalım
     yeni_durum = 1 if data.get('durum') else 0
     
-    # --- İŞTE BU SATIRI EKLE ---
-    print(f"👀 DİKKAT: Görev ID: {id} için durum değişti! Yeni Durum: {yeni_durum}")
-    # ---------------------------
+    logging.info(f"Görev ID: {id} durumu güncellendi. Yeni Durum: {yeni_durum}")
 
     conn = get_db_connection()
     conn.execute('UPDATE yapilacak_is SET durum = ? WHERE id = ?', (yeni_durum, id))
     conn.commit()
     conn.close()
     return jsonify({'message': 'Durum güncellendi'}), 200
+
 
 if __name__ == '__main__':
     app.run(port=5000, debug=True)
