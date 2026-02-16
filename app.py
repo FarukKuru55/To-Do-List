@@ -42,7 +42,7 @@ def ana_sayfa():
 @app.route('/yapilacak_is/list', methods=['GET'])
 def get_yapilacak_isler():
     conn = get_db_connection()
-    yapilacak_isler = conn.execute('SELECT * FROM yapilacak_is').fetchall()
+    yapilacak_isler = conn.execute('SELECT * FROM yapilacak_is ORDER BY id DESC').fetchall()
     conn.close()
     
     # veritabanından gelen görevleri JSON formatına dönüştür
@@ -115,15 +115,20 @@ def update_yapilacak_is():
     return jsonify({'message': 'Görev başarıyla güncellendi!'}) ,200
 
   # Tik atma
+# app.py'de toggle_yapilacak_is fonksiyonunu bul ve böyle değiştir:
+
 @app.route('/yapilacak_is/toggle', methods=['POST'])
 def toggle_yapilacak_is():
     data = request.json
-    yapilacak_is_id = data.get('id')
-    # JS'den ne geliyorsa onu alıyoruz (True ise 1, False ise 0 yap)
+    id = data.get('id')  # ID'yi değişkene alalım
     yeni_durum = 1 if data.get('durum') else 0
     
+    # --- İŞTE BU SATIRI EKLE ---
+    print(f"👀 DİKKAT: Görev ID: {id} için durum değişti! Yeni Durum: {yeni_durum}")
+    # ---------------------------
+
     conn = get_db_connection()
-    conn.execute('UPDATE yapilacak_is SET durum = ? WHERE id = ?', (yeni_durum, yapilacak_is_id))
+    conn.execute('UPDATE yapilacak_is SET durum = ? WHERE id = ?', (yeni_durum, id))
     conn.commit()
     conn.close()
     return jsonify({'message': 'Durum güncellendi'}), 200
