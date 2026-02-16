@@ -1,0 +1,50 @@
+
+        body {
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            color: #f8fafc;
+            min-height: 100vh;
+        }
+        .container { max-width: 850px; }
+        .app-card {
+            background: #000000;
+            border-radius: 18px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+        }
+        .list-group-item {
+            border-radius: 14px !important;
+            margin-bottom: 12px;
+            border: none;
+            background: #f8fafc;
+            transition: 0.25s;
+        }
+        .list-group-item:hover {
+            transform: translateY(-3px) scale(1.01);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.08);
+        }
+        .app-title {
+            font-weight: 800;
+            background: linear-gradient(90deg, #2563eb, #06b6d4);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .btn-primary {
+            background: linear-gradient(90deg, #2563eb, #3b82f6);
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+        }
+
+        .completed {
+            text-decoration: line-through;
+            color: #6b7280 !important;
+            opacity: 0.6;
+        }
+
+        .big-check {
+            width: 22px;
+            height: 22px;
+            accent-color:  #2563eb;
+            cursor: pointer;
+        }

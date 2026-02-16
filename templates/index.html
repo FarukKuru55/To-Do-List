@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Görev Takip Sistemi</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylee.css') }}">
+    <script src="{{ url_for('static', filename='main.js') }}" defer></script>
+    <!-- Flask’ta static dosyalar normal link ile değil → url_for ile çağrılır. -->
+</head>
+<body>
+
+    <div class="container mt-5">
+        <div class="app-card">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h1 class="app-title">Görev Takip Sistemi</h1>
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#yeniyapilacak_isModal" onclick="yeniyapilacak_isModunuAc()">
+                    + Yeni Görev Ekle
+                </button>
+            </div>
+            <div id="yapilacak_isListesi" class="list-group"></div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="yeniyapilacak_isModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title">Görev Ekle / Düzenle</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="tskName" class="form-label fw-semibold">Görev Adı</label>
+                        <input type="text" class="form-control" id="tskName" placeholder="Örn: Raporu hazırla"> 
+                    </div>
+                    <div class="mb-3">
+                        <label for="tskData" class="form-label fw-semibold">Son Tarih</label>
+                        <input type="datetime-local" class="form-control" id="tskData">
+                    </div>
+                </div>
+                <div class="modal-footer bg-light">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Vazgeç</button>
+                    <button type="button" class="btn btn-primary px-4" id="btnKaydet">Kaydet</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  
+    
+</body>
+</html>
